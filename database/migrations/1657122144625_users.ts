@@ -22,8 +22,8 @@ export default class UsersSchema extends BaseSchema {
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).notNullable()
       table.timestamp('deleted_at', { useTz: true }).notNullable()
-      table.integer('created_by', 11)
-      table.integer('updated_by', 11)
+      table.integer('created_by', 11).nullable()
+      table.integer('updated_by', 11).nullable()
     })
   }
 

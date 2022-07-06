@@ -27,7 +27,7 @@ export default hashConfig({
   | free to change the default value
   |
   */
-  default: Env.get('HASH_DRIVER', 'argon'),
+  default: Env.get('HASH_DRIVER', 'Bcrypt2HashDriver'),
 
   list: {
     /*
@@ -67,6 +67,10 @@ export default hashConfig({
     */
     bcrypt: {
       driver: 'bcrypt',
+      rounds: 10,
+    },
+    Bcrypt2HashDriver: {
+      driver: 'Bcrypt2HashDriver',
       rounds: 10,
     },
   },
