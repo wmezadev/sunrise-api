@@ -66,7 +66,14 @@ declare module '@ioc:Adonis/Addons/Auth' {
     */
     api: {
       implementation: OATGuardContract<'user', 'api'>
-      config: OATGuardConfig<'user'>
+      config: OATGuardConfig<'user'>,
+      driver: 'oat',
+      provider: {
+        driver: 'lucid',
+        identifierKey: 'id',
+        uids: ['email'],
+        model: () => typeof import('App/Models/User'),
+      }
     }
   }
 }
