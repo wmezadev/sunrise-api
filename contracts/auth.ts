@@ -64,6 +64,17 @@ declare module '@ioc:Adonis/Addons/Auth' {
     | to authenticate requests.
     |
     */
+    web: {
+      implementation: SessionGuardContract<'user', 'web'>,
+      config: SessionGuardConfig<'user'>,
+      driver: 'session',
+      provider: {
+        driver: 'lucid',
+        identifierKey: 'id',
+        uids: ['email'],
+        model: () => typeof import('App/Models/User'),
+      }
+    },
     api: {
       implementation: OATGuardContract<'user', 'api'>
       config: OATGuardConfig<'user'>,

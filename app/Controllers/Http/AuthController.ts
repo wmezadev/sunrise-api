@@ -7,14 +7,13 @@ export default class AuthController {
         const email = request.input('email')
         const password = request.input('password')
         try {
-            const token = await auth.use('api').attempt(email, password, { expiresIn: '1days' })
-            return token
+            return await auth.use('web').attempt(email, password)
         } catch {
             return response.unauthorized('Invalid credentials')
         }
     }
 
-    public async signup(ctx: HttpContextContract) {
+    public async register(ctx: HttpContextContract) {
         const { request, response } = ctx
         const fields = request.only(['name', 'first_name','last_name', 'password', 'avatar', 'phone', 'address', 'email'])
         try {
@@ -31,7 +30,7 @@ export default class AuthController {
         try {
             await bouncer.with('UserPolicy').authorize('passwordReset', user)
             await user.merge({ password: request.input('password') }).save()
-            await auth.use('api').revoke()
+            await auth.use('web').logout()
             return user
         } catch (error) {
             return response.internalServerError({ message: "Error while reseting password User" })

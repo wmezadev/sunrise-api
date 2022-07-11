@@ -103,6 +103,15 @@ const authConfig: AuthConfig = {
         model: () => import('App/Models/User'),
       },
     },
+    web: {
+      driver: 'session',
+      provider: {
+        driver: 'lucid',
+        identifierKey: 'id',
+        uids: ['email'],
+        model: () => import('App/Models/User'),
+      },
+    },
   },
 }
 
